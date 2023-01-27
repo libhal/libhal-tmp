@@ -1,0 +1,9 @@
+{
+    "version": 4,
+    "vendor": {
+        "conan": {}
+    },
+    "include": [
+        "/Users/kammce/git/libhal/libhal-tmpxxx/test_package/build/Debug/generators/CMakePresets.json"
+    ]
+}
