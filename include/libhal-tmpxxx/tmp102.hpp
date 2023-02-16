@@ -41,9 +41,9 @@ private:
   /// @param device_address The device address of the sensor. The address is
   ///                       configured by physically modifying the connection of
   ///                       the P0 pin.
-  explicit constexpr tmp102(hal::i2c& i2c, hal::byte device_address)
-    : m_i2c(&i2c)
-    , m_address(device_address)
+  explicit constexpr tmp102(hal::i2c& p_i2c, hal::byte p_device_address)
+    : m_i2c(&p_i2c)
+    , m_address(p_device_address)
   {
   }
 
@@ -75,7 +75,8 @@ private:
   {
     std::array<hal::byte, 2> payload{ configuration_register,
                                       one_shot_shutdown_mode };
-    return hal::write(*m_i2c, m_address, payload, hal::never_timeout());
+    HAL_CHECK(hal::write(*m_i2c, m_address, payload, hal::never_timeout()));
+    return hal::success();
   }
 
   /// The I2C peripheral used for communication with the device.
