@@ -4,6 +4,7 @@
         "conan": {}
     },
     "include": [
-        "/Users/kammce/git/libhal/libhal-tmpxxx/test_package/build/Debug/generators/CMakePresets.json"
+        "/Users/kammce/git/libhal/libhal-tmpxxx/test_package/build/Debug/generators/CMakePresets.json",
+        "/Users/kammce/git/libhal/libhal-tmpxxx/test_package/build/clang-14-armv8-20-release/generators/CMakePresets.json"
     ]
 }
