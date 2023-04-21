@@ -1,9 +1,23 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 cmake_minimum_required(VERSION 3.20)
 
 project(demos VERSION 0.0.1 LANGUAGES CXX)
 
 find_package(libhal-lpc40xx REQUIRED CONFIG)
-find_package(libhal-tmpxxx REQUIRED CONFIG)
+find_package(libhal-tmp REQUIRED CONFIG)
 find_package(libhal-util REQUIRED CONFIG)
 
 set(DEMOS tmp102)
@@ -25,7 +39,7 @@ foreach(target IN LISTS TARGETS)
         target_link_options(${current_project} PRIVATE -u _printf_float)
         target_link_libraries(${current_project} PRIVATE
             libhal::${target}
-            libhal::tmpxxx
+            libhal::tmp
             libhal::util)
         arm_post_build(${current_project})
     endforeach()

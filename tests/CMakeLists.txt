@@ -1,3 +1,17 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 cmake_minimum_required(VERSION 3.15)
 
 project(unit_test VERSION 0.0.1 LANGUAGES CXX)
@@ -26,7 +40,7 @@ set(CMAKE_BUILD_TYPE "Debug")
 
 find_package(ut REQUIRED CONFIG)
 find_package(libhal-mock REQUIRED CONFIG)
-find_package(libhal-tmpxxx REQUIRED CONFIG)
+find_package(libhal-tmp REQUIRED CONFIG)
 
 add_executable(${PROJECT_NAME}
   tmp102.test.cpp
@@ -54,5 +68,5 @@ target_link_options(${PROJECT_NAME} PRIVATE
   -fsanitize=address)
 target_link_libraries(${PROJECT_NAME} PRIVATE
   Boost::ut
-  libhal::tmpxxx
+  libhal::tmp
   libhal::mock)

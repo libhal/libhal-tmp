@@ -13,6 +13,6 @@ jobs:
   ci:
     uses: libhal/ci/.github/workflows/library.yml@main
     with:
-      library: libhal-tmpxxx
+      library: libhal-tmp
       coverage: true
     secrets: inherit

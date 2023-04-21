@@ -1,3 +1,19 @@
+#!/usr/bin/python
+#
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from conan import ConanFile
 from conan.tools.files import copy
 from conan.tools.layout import basic_layout
@@ -9,14 +25,14 @@ import os
 required_conan_version = ">=1.50.0"
 
 
-class LibhalTmpxxxConan(ConanFile):
-    name = "libhal-tmpxxx"
+class libhal_tmp_conan(ConanFile):
+    name = "libhal-tmp"
     version = "0.4.0"
     license = "Apache-2.0"
     url = "https://github.com/conan-io/conan-center-index"
-    homepage = "https://github.com/libhal/libhal-tmpxxx"
-    description = ("A collection of drivers for the tmpxxx")
-    topics = ("tmpxxx", "temperature", "temperature sensor",
+    homepage = "https://github.com/libhal/libhal-tmp"
+    description = ("A collection of drivers for the tmp")
+    topics = ("tmp", "temperature", "temperature sensor",
               "device driver", "driver")
     settings = "compiler"
     exports_sources = "include/*"
@@ -75,4 +91,4 @@ class LibhalTmpxxxConan(ConanFile):
         self.cpp_info.frameworkdirs = []
         self.cpp_info.libdirs = []
         self.cpp_info.resdirs = []
-        self.cpp_info.set_property("cmake_target_name", "libhal::tmpxxx")
+        self.cpp_info.set_property("cmake_target_name", "libhal::tmp")
