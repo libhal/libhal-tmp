@@ -24,7 +24,6 @@ void tmp102_test()
 
   "tmp102::create()"_test = []() {
     // Setup
-
     // Exercise
     // Verify
   };

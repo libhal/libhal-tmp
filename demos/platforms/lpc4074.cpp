@@ -16,17 +16,16 @@
 #include <libhal-armcortex/startup.hpp>
 #include <libhal-armcortex/system_control.hpp>
 
-#include <libhal-lpc40xx/constants.hpp>
-#include <libhal-lpc40xx/i2c.hpp>
-#include <libhal-lpc40xx/system_controller.hpp>
-#include <libhal-lpc40xx/uart.hpp>
+#include <libhal-lpc40/constants.hpp>
+#include <libhal-lpc40/i2c.hpp>
+#include <libhal-lpc40/system_controller.hpp>
+#include <libhal-lpc40/uart.hpp>
 
 #include "../../hardware_map.hpp"
 
 hal::result<hardware_map> initialize_target()
 {
   using namespace hal::literals;
-  hal::cortex_m::initialize_data_section();
 
   // Set the MCU to the maximum clock speed
   HAL_CHECK(hal::lpc40xx::clock::maximum(10.0_MHz));

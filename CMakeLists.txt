@@ -13,16 +13,24 @@
 # limitations under the License.
 
 cmake_minimum_required(VERSION 3.15)
-project(test_package LANGUAGES CXX)
 
-find_package(libhal-tmp REQUIRED CONFIG)
+project(libhal-tmp VERSION 0.0.1 LANGUAGES CXX)
 
-add_executable(${PROJECT_NAME} main.cpp)
-target_include_directories(${PROJECT_NAME} PUBLIC .)
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
+find_package(libhal REQUIRED CONFIG)
+find_package(libhal-util REQUIRED CONFIG)
 
-if(BAREMETAL)
-  target_link_options(${PROJECT_NAME} PRIVATE --oslib=semihost)
+if(NOT BUILD_TESTING STREQUAL OFF)
+  add_subdirectory(tests)
 endif()
 
-target_link_libraries(${PROJECT_NAME} PRIVATE libhal::tmp)
+add_library(libhal-tmp
+  src/tmp102.cpp)
+
+target_include_directories(libhal-tmp PUBLIC include src/)
+target_compile_features(libhal-tmp PRIVATE cxx_std_20)
+target_link_libraries(libhal-tmp PRIVATE
+  libhal::libhal
+  libhal::util
+)
+
+install(TARGETS libhal-tmp)

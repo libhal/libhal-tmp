@@ -43,6 +43,11 @@ find_package(libhal-mock REQUIRED CONFIG)
 find_package(libhal-tmp REQUIRED CONFIG)
 
 add_executable(${PROJECT_NAME}
+
+  # Source
+  ../src/tmp102.cpp
+
+  # Tests
   tmp102.test.cpp
   main.test.cpp)
 
@@ -68,5 +73,4 @@ target_link_options(${PROJECT_NAME} PRIVATE
   -fsanitize=address)
 target_link_libraries(${PROJECT_NAME} PRIVATE
   Boost::ut
-  libhal::tmp
   libhal::mock)

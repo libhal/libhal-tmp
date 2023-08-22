@@ -31,7 +31,7 @@ hal::status application(hardware_map& p_map)
   auto tmp102 = HAL_CHECK(hal::tmp::tmp102::create(i2c));
 
   while (true) {
-    HAL_CHECK(hal::delay(clock, 500ms));
+    hal::delay(clock, 500ms);
     hal::print(console, "Reading temperature... ");
     auto temperature = HAL_CHECK(tmp102.read()).temperature;
     hal::print<32>(console, "measured temperature = %f °C\n", temperature);
