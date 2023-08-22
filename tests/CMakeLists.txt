@@ -40,7 +40,6 @@ set(CMAKE_BUILD_TYPE "Debug")
 
 find_package(ut REQUIRED CONFIG)
 find_package(libhal-mock REQUIRED CONFIG)
-find_package(libhal-tmp REQUIRED CONFIG)
 
 add_executable(${PROJECT_NAME}
 

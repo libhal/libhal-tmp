@@ -26,7 +26,7 @@ required_conan_version = ">=2.0.6"
 
 class libhal_tmp_conan(ConanFile):
     name = "libhal-tmp"
-    version = "0.4.0"
+    version = "0.5.0"
     license = "Apache-2.0"
     url = "https://github.com/conan-io/conan-center-index"
     homepage = "https://github.com/libhal/libhal-tmp"
@@ -57,6 +57,7 @@ class libhal_tmp_conan(ConanFile):
     def build_requirements(self):
         self.tool_requires("cmake/3.27.1")
         self.tool_requires("libhal-cmake-util/1.0.0")
+        self.test_requires("libhal-mock/[^2.0.0]")
         self.test_requires("boost-ext-ut/1.1.9")
 
     def requirements(self):

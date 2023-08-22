@@ -30,7 +30,7 @@ find_package(libhal-${platform_library} REQUIRED CONFIG)
 find_package(libhal-tmp REQUIRED CONFIG)
 find_package(libhal-util REQUIRED CONFIG)
 
-set(DEMOS tmp9685)
+set(DEMOS tmp102)
 
 add_library(startup_code
     main.cpp

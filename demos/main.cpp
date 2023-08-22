@@ -16,7 +16,7 @@
 
 int main()
 {
-  auto init_result = initialize_target();
+  auto init_result = initialize_platform();
 
   if (!init_result) {
     hal::halt();
