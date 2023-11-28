@@ -14,7 +14,7 @@
 
 cmake_minimum_required(VERSION 3.15)
 
-project(libhal-tmp VERSION 0.0.1 LANGUAGES CXX)
+project(libhal-tmp LANGUAGES CXX)
 
 find_package(libhal REQUIRED CONFIG)
 find_package(libhal-util REQUIRED CONFIG)

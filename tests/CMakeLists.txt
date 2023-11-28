@@ -14,7 +14,7 @@
 
 cmake_minimum_required(VERSION 3.15)
 
-project(unit_test VERSION 0.0.1 LANGUAGES CXX)
+project(unit_test LANGUAGES CXX)
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   # require at least gcc 11
