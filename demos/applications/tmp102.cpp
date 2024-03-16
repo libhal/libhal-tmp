@@ -18,7 +18,7 @@
 
 #include "../hardware_map.hpp"
 
-hal::status application(hardware_map& p_map)
+void application(hardware_map_t& p_map)
 {
   using namespace std::chrono_literals;
   using namespace hal::literals;
@@ -27,15 +27,11 @@ hal::status application(hardware_map& p_map)
   auto& console = *p_map.console;
   auto& i2c = *p_map.i2c;
 
-  hal::print(console, "tmp102 Application Starting...\n\n");
-  auto tmp102 = HAL_CHECK(hal::tmp::tmp102::create(i2c));
+  hal::print(console, "[tmp102] Application Starting...\n\n");
+  hal::tmp::tmp102 tmp102(i2c);
 
   while (true) {
     hal::delay(clock, 500ms);
-    hal::print(console, "Reading temperature... ");
-    auto temperature = HAL_CHECK(tmp102.read()).temperature;
-    hal::print<32>(console, "measured temperature = %f °C\n", temperature);
+    hal::print<32>(console, "Measured temperature = %f °C\n", tmp102.read());
   }
-
-  return hal::success();
 }

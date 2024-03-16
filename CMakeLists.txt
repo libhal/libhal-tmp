@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.25)
 
 project(libhal-tmp LANGUAGES CXX)
 
@@ -24,18 +24,4 @@ libhal_test_and_make_library(
   TEST_SOURCES
   tests/tmp102.test.cpp
   tests/main.test.cpp
-
-  PACKAGES
-  libhal
-  libhal-util
-
-  LINK_LIBRARIES
-  libhal::libhal
-  libhal::util
-
-  TEST_PACKAGES
-  libhal-mock
-
-  TEST_LINK_LIBRARIES
-  libhal::mock
 )
