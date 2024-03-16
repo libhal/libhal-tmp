@@ -33,45 +33,42 @@ static constexpr hal::byte configuration_register = 0x01;
 /// The command to enable one-shot shutdown mode.
 static constexpr hal::byte one_shot_shutdown_mode = 0x81;
 
-result<tmp102> tmp102::create(hal::i2c& i2c, hal::byte device_address)
-{
-  return tmp102(i2c, device_address);
-}
-
 tmp102::tmp102(hal::i2c& p_i2c, hal::byte p_device_address)
   : m_i2c(&p_i2c)
   , m_address(p_device_address)
 {
+  // Attempt to sample the temperature to determine if the device is available
+  // on the bus.
+  [[maybe_unused]] auto value = tmp102::driver_read();
 }
 
-hal::result<temperature_sensor::read_t> tmp102::driver_read()
+hal::celsius tmp102::driver_read()
 {
   std::array<hal::byte, 1> payload{ temperature_register };
   constexpr float celsius_per_digit = 0.0625f;
   std::array<hal::byte, 2> buffer;
 
-  HAL_CHECK(one_shot_shutdown());
+  one_shot_shutdown();
 
-  HAL_CHECK(hal::write_then_read(
-    *m_i2c, m_address, payload, buffer, hal::never_timeout()));
+  hal::write_then_read(
+    *m_i2c, m_address, payload, buffer, hal::never_timeout());
 
   // The temperature value is from bits [15:3], with the rest being zeros
   // The MSB is received first in the byte.
   const int32_t temperature_reading = (buffer[0] << 4) | (buffer[1] >> 4);
 
-  return temperature_sensor::read_t{
-    .temperature = static_cast<float>(temperature_reading) * celsius_per_digit,
-  };
+  return static_cast<float>(temperature_reading) * celsius_per_digit;
 }
 
 /// Sets the device to use one-shot shutdown mode. This allows power to be
 /// conserved by putting the device in the shutdown state once a reading is
 /// obtained.
-hal::status tmp102::one_shot_shutdown()
+void tmp102::one_shot_shutdown()
 {
-  std::array<hal::byte, 2> payload{ configuration_register,
-                                    one_shot_shutdown_mode };
-  HAL_CHECK(hal::write(*m_i2c, m_address, payload, hal::never_timeout()));
-  return hal::success();
+  hal::write(
+    *m_i2c,
+    m_address,
+    std::array<hal::byte, 2>{ configuration_register, one_shot_shutdown_mode },
+    hal::never_timeout());
 }
 }  // namespace hal::tmp

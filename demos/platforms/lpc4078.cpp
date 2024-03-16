@@ -22,34 +22,33 @@
 
 #include "../hardware_map.hpp"
 
-hal::result<hardware_map> initialize_platform()
+hardware_map_t initialize_platform()
 {
   using namespace hal::literals;
 
   // Set the MCU to the maximum clock speed
-  HAL_CHECK(hal::lpc40::clock::maximum(10.0_MHz));
+  hal::lpc40::maximum(10.0_MHz);
 
   // Create a hardware counter
-  auto& clock = hal::lpc40::clock::get();
-  auto cpu_frequency = clock.get_frequency(hal::lpc40::peripheral::cpu);
-  static hal::cortex_m::dwt_counter counter(cpu_frequency);
+  static hal::cortex_m::dwt_counter counter(
+    hal::lpc40::get_frequency(hal::lpc40::peripheral::cpu));
 
   static std::array<hal::byte, 64> uart0_buffer{};
 
   // Get and initialize UART0 for UART based logging
-  static auto uart0 = HAL_CHECK((hal::lpc40::uart::get(0,
-                                                       uart0_buffer,
-                                                       hal::serial::settings{
-                                                         .baud_rate = 115200.0f,
-                                                       })));
+  static hal::lpc40::uart uart0(0,
+                                uart0_buffer,
+                                hal::serial::settings{
+                                  .baud_rate = 115200.0f,
+                                });
 
   // Get and initialize I2C
-  static auto i2c2 = HAL_CHECK((hal::lpc40::i2c::get(2,
-                                                     hal::i2c::settings{
-                                                       .clock_rate = 100.0_kHz,
-                                                     })));
+  static hal::lpc40::i2c i2c2(2,
+                              hal::i2c::settings{
+                                .clock_rate = 100.0_kHz,
+                              });
 
-  return hardware_map{
+  return {
     .console = &uart0,
     .i2c = &i2c2,
     .clock = &counter,

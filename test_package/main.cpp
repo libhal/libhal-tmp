@@ -12,19 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <array>
-
 #include <libhal-tmp/tmp102.hpp>
-#include <libhal/i2c.hpp>
 
 int main()
 {
-  using namespace std::literals;
 }
-
-namespace boost {
-void throw_exception(std::exception const& e)
-{
-  hal::halt();
-}
-}  // namespace boost
