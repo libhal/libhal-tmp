@@ -55,7 +55,7 @@ hal::celsius tmp102::driver_read()
 
   // The temperature value is from bits [15:3], with the rest being zeros
   // The MSB is received first in the byte.
-  const int32_t temperature_reading = (buffer[0] << 4) | (buffer[1] >> 4);
+  int32_t const temperature_reading = (buffer[0] << 4) | (buffer[1] >> 4);
 
   return static_cast<float>(temperature_reading) * celsius_per_digit;
 }
